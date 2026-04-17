@@ -35,8 +35,8 @@ resource "aws_security_group_rule" "redis_bastion" {
 # Creation of MySQL Security Group Rule, it should accept connection from bastion
 resource "aws_security_group_rule" "mysql_bastion" {
   type                     = "ingress"
-  from_port                = 22
-  to_port                  = 22
+  from_port                = 3306
+  to_port                  = 3306
   protocol                 = "tcp"
   # Where traffic is coming from?
   source_security_group_id = local.bastion_sg_id # Either cidr block or security group should be used...
