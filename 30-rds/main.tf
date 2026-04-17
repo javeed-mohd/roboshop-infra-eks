@@ -9,30 +9,17 @@ module "db" {
   allocated_storage = 20
 
   db_name  = "cities"
-  username = "user"
+  username = "root"
   port     = "3306"
+  manage_master_user_password = false
+  password_wo = "RoboShop#123"
+  password_wo_version = 1
 
-  iam_database_authentication_enabled = true
-
-  vpc_security_group_ids = ["sg-12345678"]
-
-  maintenance_window = "Mon:00:00-Mon:03:00"
-  backup_window      = "03:00-06:00"
-
-  # Enhanced Monitoring - see example for details on how to create the role
-  # by yourself, in case you don't want to create it automatically
-  monitoring_interval    = "30"
-  monitoring_role_name   = "MyRDSMonitoringRole"
-  create_monitoring_role = true
-
-  tags = {
-    Owner       = "user"
-    Environment = "dev"
-  }
+  vpc_security_group_ids = [local.mysql_sg_id]
 
   # DB subnet group
-  create_db_subnet_group = true
-  subnet_ids             = ["subnet-12345678", "subnet-87654321"]
+  create_db_subnet_group = false
+  db_subnet_group_name   = local.database_subnet_group_name
 
   # DB parameter group
   family = "mysql8.0"
@@ -40,8 +27,8 @@ module "db" {
   # DB option group
   major_engine_version = "8.0"
 
-  # Database Deletion Protection
-  deletion_protection = true
+  # Database Deletion Protection - If true, we can't delete
+  deletion_protection = false
 
   parameters = [
     {
@@ -70,4 +57,11 @@ module "db" {
       ]
     },
   ]
+  
+   tags = merge (
+    local.common_tags,
+    {
+        Name = "${var.project}-${var.environment}-mysql"
+    }
+  )
 }
