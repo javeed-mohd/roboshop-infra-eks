@@ -58,6 +58,7 @@ module "db" {
     },
   ]
   
+  # roboshop-dev-mysql
    tags = merge (
     local.common_tags,
     {
