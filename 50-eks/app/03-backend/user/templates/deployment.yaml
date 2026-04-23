@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: user
   namespace: roboshop
-  # these labels are replicaset labels
+  # These labels are replicaset labels reference
   labels:
     project: roboshop
     tier: backend
@@ -11,12 +11,12 @@ metadata:
 spec:
   replicas: {{ .Values.deployment.replicas }}
   selector:
-    # using these labels replica set selects the pod
+  # Using these labels, replicaset selects the pod.
     matchLabels:
       project: roboshop
       tier: backend
       component: user
-  # This is pod definition, pod is subset of replicaset
+  # This is Pod definition, Pod is subset of replicaset
   template:
     metadata:
       labels:
@@ -27,29 +27,35 @@ spec:
       containers:
       - name: user
         image: "{{ .Values.deployment.imageName }}:{{ .Values.deployment.imageVersion }}"
-        imagePullPolicy: Always # safe to pull everytime, there may be images with same version rebuilt and pushed
+        imagePullPolicy: Always       # Safe to pull everytime, there may be same version rebuilt and pushed.
         resources:
+          # Soft limit
           requests:
-            cpu: "100m"
             memory: "128Mi"
+            cpu: "100m"
+          # Hard limit
           limits:
-            cpu: "100m"
             memory: "128Mi"
+            cpu: "100m"
+        # A readiness probe checks whether a container is ready to accept traffic. If it fails, K8s stops sending requests to that container.
         readinessProbe:
           # httpGet:
           #   path: /health
           #   port: 8080
+          # To check whether the port is open/not
           tcpSocket:
             port: 8080
           failureThreshold: 2
           periodSeconds: 10
-          initialDelaySeconds: 15
+          initialDelaySeconds: 15       # Container will become available in 35 seconds.
+        # A liveness probe checks whether a container is still running properly. If it fails, K8s restarts the container.
         livenessProbe:
           httpGet:
             path: /health
             port: 8080
           failureThreshold: 2
           periodSeconds: 10
+        # envFrom is used in a Pod specifications to load all key–value pairs from a ConfigMap or Secret as environment variables into a container.
         envFrom:
         - configMapRef:
             name: user

@@ -1,57 +1,60 @@
 apiVersion: v1
-kind: Service
+kind: Service   # To find other nodes IP address in Cluster for data replication
 metadata:
   name: mongodb-headless
   namespace: roboshop
   labels:
     project: roboshop
-    tier: db
+    tier: database
     component: mongodb
 spec:
   clusterIP: None
   selector:
-    # labels are used as selectors
+    # Labels are used as selectors.
     project: roboshop
-    tier: db
+    tier: database
     component: mongodb
   ports:
   - protocol: TCP
-    port: 27017 # servie port
-    targetPort: 27017 # container port
+    port: 27017          # Service Port
+    targetPort: 27017    # Container Port  
 ---
+# Create multiple replicas of your pod. Always runs desired number of pods.
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: mongodb
   namespace: roboshop
-  labels: 
+  # These labels are replicaset labels reference
+  labels:
     project: roboshop
-    tier: db
+    tier: database
     component: mongodb
 spec:
   selector:
+  # Using these labels, replicaset selects the pod.
     matchLabels:
       project: roboshop
-      tier: db
+      tier: database
       component: mongodb
-  serviceName: "mongodb-headless" # we should attach headless service
-  #replicas: 3
-  replicas: 1 # by default is 1
+  serviceName: "mongodb-headless"    # We should attach headless service
+  # replicas: 3          # By default is 1
+  replicas: 1
   # Pod definition
   template:
     metadata:
       labels:
         project: roboshop
-        tier: db
+        tier: database
         component: mongodb
     spec:
       containers:
       - name: mongodb
-        image: joindevops/mongodb:1.0.0
+        image: javeedmohd214/mongodb:1.4.0
         volumeMounts:
         - name: mongodb
           mountPath: /data/db
-  # PVC
+  # Persistent Volume Claim (PVC) -> It is claiming that it needs Storage.
   volumeClaimTemplates:
   - metadata:
       name: mongodb
@@ -63,21 +66,21 @@ spec:
           storage: 1Gi
 ---
 apiVersion: v1
-kind: Service
+kind: Service           # Used for Load Balancing
 metadata:
   name: mongodb
   namespace: roboshop
   labels:
     project: roboshop
-    tier: db
+    tier: database
     component: mongodb
 spec:
   selector:
-    # labels are used as selectors
+    # Labels are used as selectors.
     project: roboshop
-    tier: db
+    tier: database
     component: mongodb
   ports:
   - protocol: TCP
-    port: 27017 # servie port
-    targetPort: 27017 # container port
+    port: 27017          # Service Port
+    targetPort: 27017    # Container Port   

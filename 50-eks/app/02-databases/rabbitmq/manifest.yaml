@@ -1,69 +1,71 @@
+# A Secret is an object used to store sensitive data such as: Passwords, API keys, Tokens. These are meant for confidential information.
 apiVersion: v1
 kind: Secret
 metadata:
   name: rabbitmq-secret
   namespace: roboshop
+# Values are base64-encoded
 data:
   RABBITMQ_DEFAULT_USER: cm9ib3Nob3A=
   RABBITMQ_DEFAULT_PASS: cm9ib3Nob3AxMjM=
 ---
 apiVersion: v1
-kind: Service
+kind: Service         # To find other nodes IP address in Cluster for data replication
 metadata:
   name: rabbitmq-headless
   namespace: roboshop
   labels:
     project: roboshop
-    tier: db
+    tier: database
     component: rabbitmq
 spec:
   clusterIP: None
   selector:
-    # labels are used as selectors
+    # Labels are used as selectors.
     project: roboshop
-    tier: db
+    tier: database
     component: rabbitmq
   ports:
   - protocol: TCP
-    port: 5672 # servie port
-    targetPort: 5672 # container port
+    port: 5672          # Service Port
+    targetPort: 5672    # Container Port  
 ---
+# Create multiple replicas of your pod. Always runs desired number of pods.
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: rabbitmq
   namespace: roboshop
-  labels: 
+  # These labels are replicaset labels reference
+  labels:
     project: roboshop
-    tier: db
+    tier: database
     component: rabbitmq
 spec:
   selector:
+  # Using these labels, replicaset selects the pod.
     matchLabels:
       project: roboshop
-      tier: db
+      tier: database
       component: rabbitmq
-  serviceName: "rabbitmq-headless" # we should attach headless service
-  #replicas: 3
-  replicas: 1 # by default is 1
+  serviceName: "rabbitmq-headless"    # We should attach headless service
+  # replicas: 3          # By default is 1
+  replicas: 1
   # Pod definition
   template:
     metadata:
       labels:
         project: roboshop
-        tier: db
+        tier: database
         component: rabbitmq
     spec:
       containers:
       - name: rabbitmq
         image: rabbitmq:3
-        envFrom:
-        - secretRef:
-            name: rabbitmq-secret
         volumeMounts:
         - name: rabbitmq
           mountPath: /var/lib/rabbitmq
-  # PVC
+  # Persistent Volume Claim (PVC) -> It is claiming that it needs Storage.
   volumeClaimTemplates:
   - metadata:
       name: rabbitmq
@@ -75,21 +77,21 @@ spec:
           storage: 1Gi
 ---
 apiVersion: v1
-kind: Service
+kind: Service         # Used for Load Balancing
 metadata:
   name: rabbitmq
   namespace: roboshop
   labels:
     project: roboshop
-    tier: db
+    tier: database
     component: rabbitmq
 spec:
   selector:
-    # labels are used as selectors
+    # Labels are used as selectors.
     project: roboshop
-    tier: db
+    tier: database
     component: rabbitmq
   ports:
   - protocol: TCP
-    port: 5672 # servie port
-    targetPort: 5672 # container port
+    port: 5672         # Service Port
+    targetPort: 5672   # Container Port   
