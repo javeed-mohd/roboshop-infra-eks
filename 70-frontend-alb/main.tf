@@ -70,7 +70,7 @@ resource "aws_lb_listener_rule" "frontend" {
 
   condition {
     host_header {
-      values = ["${var.project}-${var.environment}.${var.domain_name}"]
+      values = ["${var.project}-${var.environment}.${var.domain_name}"]     # roboshop-dev.devopsdaws.online
     }
   }
 }
