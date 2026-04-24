@@ -47,7 +47,7 @@ spec:
             port: 8080
           failureThreshold: 2
           periodSeconds: 10
-          initialDelaySeconds: 120       # Container will become available in 35 seconds.
+          initialDelaySeconds: 120
         # A startup probe checks whether a container has successfully started. It is used for slow-starting applications and prevents premature restarts during initialization.
         startupProbe:
           httpGet:
