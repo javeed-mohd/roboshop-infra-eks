@@ -1,5 +1,5 @@
-apiVersion: v2 # K8S Helm related
+apiVersion: v2      # K8s Helm related
 name: frontend
-version: 0.0.1 # This is chart version
-appVersion: 1.0.0 # This is application version like catalogue version
-description: "installing 1.0.0"
+version: 0.0.1      # This is Chart version
+appVersion: 1.4.0   # This is application version
+description: "Installing Frontend 1.4.0"

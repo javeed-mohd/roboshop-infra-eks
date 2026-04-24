@@ -9,11 +9,11 @@ metadata:
     component: frontend
 spec:
   selector:
-    # labels are used as selectors
+    # Labels are used as selectors
     project: roboshop
     tier: frontend
     component: frontend
   ports:
   - protocol: TCP
-    port: 80 # servie port
-    targetPort: 80 # container port
+    port: 80          # Service port
+    targetPort: 80    # Container port

@@ -1,6 +1,6 @@
 deployment:
   replicas: "1"
-  imageName: "joindevops/frontend"
+  imageName: "javeedmohd214/frontend"
   imageVersion: "1.4.0"
 ingress:
-  host: "roboshop-dev.daws88s.online"
+  host: "roboshop-dev.devopsdaws.online" 
