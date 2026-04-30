@@ -154,3 +154,72 @@ resource "aws_security_group_rule" "eks_node_vpc_cidr" {
   cidr_blocks              = ["10.0.0.0/16"]    # Either cidr block or security group should be used...
   security_group_id        = local.eks_node_sg_id 
 }
+
+## As Part of CI-CD ####
+# Creation of Jenkins Security Group Rule, it should accept connection from public
+resource "aws_security_group_rule" "jenkins_public" {
+  type                     = "ingress"
+  from_port                = 8080
+  to_port                  = 8080
+  protocol                 = "tcp"     # All traffic
+  # Where traffic is coming from?
+  cidr_blocks              = ["0.0.0.0/0"]    # Either cidr block or security group should be used...
+  security_group_id        = local.jenkins_sg_id
+}
+
+# Creation of Jenkins Security Group Rule, it should accept connection from SSH (Secure Shell)
+resource "aws_security_group_rule" "jenkins_ssh" {
+  type                     = "ingress"
+  from_port                = 22
+  to_port                  = 22
+  protocol                 = "tcp"     # All traffic
+  # Where traffic is coming from?
+  cidr_blocks              = ["0.0.0.0/0"]    # Either cidr block or security group should be used...
+  security_group_id        = local.jenkins_sg_id
+}
+
+/*
+# Creation of Jenkins Agent Security Group Rule, it should accept connection from jenkins
+resource "aws_security_group_rule" "jenkins_agent_jenkins" {
+  type                     = "ingress"
+  from_port                = 22
+  to_port                  = 22
+  protocol                 = "tcp"     # All traffic
+  # Where traffic is coming from?
+  source_security_group_id = local.jenkins_sg_id    # Either cidr block or security group should be used...
+  security_group_id        = local.jenkins_agent_sg_id
+}
+*/
+
+# Creation of Jenkins Agent Security Group Rule, it should accept connection from SSH (Secure Shell)
+resource "aws_security_group_rule" "jenkins_agent_ssh" {
+  type                     = "ingress"
+  from_port                = 22
+  to_port                  = 22
+  protocol                 = "tcp"     # All traffic
+  # Where traffic is coming from?
+  cidr_blocks              = ["0.0.0.0/0"]    # Either cidr block or security group should be used...
+  security_group_id        = local.jenkins_agent_sg_id
+}
+
+# Creation of Sonar Security Group Rule, it should accept connection from Web
+resource "aws_security_group_rule" "sonar_web" {
+  type                     = "ingress"
+  from_port                = 9000
+  to_port                  = 9000
+  protocol                 = "tcp"     # All traffic
+  # Where traffic is coming from?
+  cidr_blocks              = ["0.0.0.0/0"]    # Either cidr block or security group should be used...
+  security_group_id        = local.sonar_sg_id
+}
+
+# Creation of Sonar Security Group Rule, it should accept connection from SSH (Secure Shell)
+resource "aws_security_group_rule" "sonar_ssh" {
+  type                     = "ingress"
+  from_port                = 22
+  to_port                  = 22
+  protocol                 = "tcp"     # All traffic
+  # Where traffic is coming from?
+  cidr_blocks              = ["0.0.0.0/0"]    # Either cidr block or security group should be used...
+  security_group_id        = local.sonar_sg_id
+}

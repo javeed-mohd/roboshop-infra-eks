@@ -19,6 +19,8 @@ variable "sg_names" {
     "bastion",
     # Openvpn --> OpenVPN is an open-source software application used to create a secure connection over the internet, commonly known as a Virtual Private Network (VPN).
     "openvpn",
-    "eks_control_plane","eks_node"
+    "eks_control_plane","eks_node",
+    "jenkins","jenkins_agent",
+    "sonar"
   ]
 }

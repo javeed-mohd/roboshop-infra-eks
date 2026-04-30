@@ -53,3 +53,18 @@ data "aws_ssm_parameter" "eks_node_sg_id" {
 data "aws_ssm_parameter" "openvpn_sg_id" {
     name = "/${var.project}/${var.environment}/openvpn_sg_id"                # /roboshop/dev/openvpn_sg_id
 }
+
+# Jenkins SG Id data source
+data "aws_ssm_parameter" "jenkins_sg_id" {
+    name = "/${var.project}/${var.environment}/jenkins_sg_id"               # /roboshop/dev/jenkins_sg_id
+}
+
+# Jenkins Agent SG Id data source
+data "aws_ssm_parameter" "jenkins_agent_sg_id" {
+    name = "/${var.project}/${var.environment}/jenkins_agent_sg_id"         # /roboshop/dev/jenkins_agent_sg_id
+}
+
+# Sonar SG Id data source
+data "aws_ssm_parameter" "sonar_sg_id" {
+    name = "/${var.project}/${var.environment}/sonar_sg_id"                 # /roboshop/dev/sonar_sg_id
+}
