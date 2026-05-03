@@ -4,7 +4,7 @@ resource "aws_ssm_parameter" "vpc_id" {
   value = module.vpc.vpc_id
 }
 
-# We get list of ids as output, so we use Stringlist while creating ids of subnets...
+# We get list of ids as output, so we use Stringlist while creating ids of subnets.
 resource "aws_ssm_parameter" "public_subnet_ids" {
   name  = "/${var.project}/${var.environment}/public_subnet_ids" # /roboshop/dev/public_subnet_ids
   type  = "StringList"
