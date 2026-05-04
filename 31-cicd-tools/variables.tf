@@ -15,6 +15,8 @@ variable "domain_name" {
   default   = "devopsdaws.online"
 }
 
+/*
 variable "sonar" {
   default   = true
 }
+*/
