@@ -132,8 +132,7 @@ Rating based on Technical Debt Ratio Technical Debt Ratio formula:
 (Total remediation cost / Development cost) × 100
 ```
 
-1️⃣ Total Remediation Cost (SonarQube)  
-What it means?  
+1️⃣ Total Remediation Cost (SonarQube), What it means?  
 Example:  
 Total time required to fix all Code Smells in the codebase.
 | Code Smell        | Fix Time |
@@ -146,8 +145,7 @@ Total time required to fix all Code Smells in the codebase.
 Total remediation cost = 1h 32m
 ```
 
-2️⃣ Development Cost (SonarQube)  
-What it means?  
+2️⃣ Development Cost (SonarQube), What it means?  
 Estimated time it would take to write the existing code from scratch.  
 SonarQube uses a fixed heuristic:  
 Development cost = Lines of Code × 30 minutes
@@ -182,14 +180,14 @@ D → 21–50%
 E → > 50%
 
 Driven mainly by:  
---> Code smells  
---> Complexity  
---> Duplication
+Code smells  
+Complexity  
+Duplication
 
 ➡️ Maintainability Rating = future change effort
 
 ### 🎯 Reliability Rating  
---> Rating based on Bugs severity  
---> Blocker/Critical bugs push rating down fast
+Rating based on Bugs severity  
+Blocker/Critical bugs push rating down fast
 
 ➡️ Reliability = stability of the app
