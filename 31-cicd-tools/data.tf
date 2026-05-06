@@ -20,7 +20,6 @@ data "aws_ami" "joindevops" {
   }
 }
 
-/*
 data "aws_ami" "sonarqube" {
   most_recent = true
   owners      = ["679593333241"] # Solve DevOps
@@ -40,7 +39,6 @@ data "aws_ami" "sonarqube" {
     values = ["x86_64"]
   }
 }
-*/
 
 # Public Subnet Id data source
 data "aws_ssm_parameter" "public_subnet_ids" {
@@ -57,9 +55,7 @@ data "aws_ssm_parameter" "jenkins_agent_sg_id" {
     name = "/${var.project}/${var.environment}/jenkins_agent_sg_id"       # /roboshop/dev/jenkins_agent_sg_id
 }
 
-/*
 # Sonar Security Group Id data source
 data "aws_ssm_parameter" "sonar_sg_id" {
     name = "/${var.project}/${var.environment}/sonar_sg_id"               # /roboshop/dev/sonar_sg_id
 }
-*/

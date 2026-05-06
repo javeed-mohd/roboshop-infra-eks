@@ -64,9 +64,7 @@ data "aws_ssm_parameter" "jenkins_agent_sg_id" {
     name = "/${var.project}/${var.environment}/jenkins_agent_sg_id"         # /roboshop/dev/jenkins_agent_sg_id
 }
 
-/*
 # Sonar SG Id data source
 data "aws_ssm_parameter" "sonar_sg_id" {
     name = "/${var.project}/${var.environment}/sonar_sg_id"                 # /roboshop/dev/sonar_sg_id
 }
-*/

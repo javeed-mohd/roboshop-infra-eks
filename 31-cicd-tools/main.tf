@@ -44,7 +44,6 @@ resource "aws_instance" "jenkins_agent" {
   )
 }
 
-/*
 # Creation of SonarQube EC2 Instance
 resource "aws_instance" "sonarqube" {
   count                   = var.sonar ? 1 : 0
@@ -68,4 +67,3 @@ resource "aws_instance" "sonarqube" {
     }
   )
 }
-*/

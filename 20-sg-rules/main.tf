@@ -202,7 +202,6 @@ resource "aws_security_group_rule" "jenkins_agent_ssh" {
   security_group_id        = local.jenkins_agent_sg_id
 }
 
-/*
 # Creation of Sonar Security Group Rule, it should accept connection from Web
 resource "aws_security_group_rule" "sonar_web" {
   type                     = "ingress"
@@ -224,4 +223,3 @@ resource "aws_security_group_rule" "sonar_ssh" {
   cidr_blocks              = ["0.0.0.0/0"]    # Either cidr block or security group should be used...
   security_group_id        = local.sonar_sg_id
 }
-*/
