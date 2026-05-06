@@ -79,18 +79,16 @@ Once you setup and login to jenkins.
 An issue representing a coding error that will likely cause unexpected behavior or application failure. This seems fine but sometimes it may break in production.
 
 ### 🔐 Vulnerabilities
-A security-related holes that can be exploited by attackers. This can be hacked
+A security-related holes that can be exploited by attackers. This can be hacked.
 
 ### 👃 Code Smells
-A maintainability issue that does not break the app but makes the code hard to understand, change, or maintain. This works today, but hurts tomorrow
+A maintainability issue that does not break the app but makes the code hard to understand, change, or maintain. This works today, but hurts tomorrow.
 
-**Technical Debt:**
-It is the estimated time required to fix all maintainability issues (code smells) in the codebase. That future pain = technical debt
+**Technical Debt:**  
+It is the estimated time required to fix all maintainability issues (code smells) in the codebase. That future pain = technical debt.
 
-**Example:**
-Your project has:
-100 code smells
-Each smell estimated as 10 minutes to fix
+**Example:**  
+Your project has 100 code smells, each smell estimated as 10 minutes to fix, then
 ```
 Technical Debt = 100 × 10 min = 1000 minutes ≈ 16.6 hours
 ```
@@ -133,6 +131,7 @@ Rating based on Technical Debt Ratio Technical Debt Ratio formula:
 ```
 (Total remediation cost / Development cost) × 100
 ```
+
 1️⃣ Total Remediation Cost (SonarQube)  
 What it means?  
 Example:  
@@ -154,7 +153,7 @@ SonarQube uses a fixed heuristic:
 Development cost = Lines of Code × 30 minutes
 (30 minutes per line is SonarQube’s default assumption)
 
-Example
+Example:
 
 Lines of Code: 1,000
 ```
@@ -162,6 +161,7 @@ Development cost = 1,000 × 30 min = 30,000 min ≈ 500 hours
 ```
 
 **Real Example:**
+
 Lines of Code: 2,000
 
 Development cost = 2,000 × 30 min = 1,000 hours  
@@ -181,20 +181,15 @@ D → 21–50%
 
 E → > 50%
 
-Driven mainly by:
-
-Code smells
-
-Complexity
-
-Duplication
+Driven mainly by:  
+--> Code smells  
+--> Complexity  
+--> Duplication
 
 ➡️ Maintainability Rating = future change effort
 
-### 🎯 Reliability Rating
-
-Rating based on Bugs severity
-
-Blocker/Critical bugs push rating down fast
+### 🎯 Reliability Rating  
+--> Rating based on Bugs severity  
+--> Blocker/Critical bugs push rating down fast
 
 ➡️ Reliability = stability of the app
