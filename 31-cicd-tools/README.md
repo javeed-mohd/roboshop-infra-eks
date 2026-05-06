@@ -52,8 +52,8 @@ Once you setup and login to jenkins.
 ### Plugins
 * Pipeline Stage View
 * Pipeline Utility Steps
-* AWS creds
-* AWS Steps
+* Pipeline AWS Steps
+* AWS Credentials
 * Sonarqube scanner
 
 ### Credentials
