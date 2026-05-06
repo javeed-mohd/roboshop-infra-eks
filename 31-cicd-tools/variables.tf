@@ -15,6 +15,7 @@ variable "domain_name" {
   default   = "devopsdaws.online"
 }
 
+# Set to false to skip SonarQube instance and its DNS record creation
 variable "sonar" {
   default   = false
 }

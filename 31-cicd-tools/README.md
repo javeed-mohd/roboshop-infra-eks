@@ -20,7 +20,7 @@ Terraform configuration to provision CI/CD infrastructure for the **roboshop** p
 | `jenkins-agent.<domain>` | A | Jenkins agent private IP |
 | `sonar.<domain>` | A | SonarQube server public IP (created when `var.sonar = true`) |
 
-Default domain: `daws88s.online`
+Default domain: `devopsdaws.online`
 
 ### Data Sources (SSM Parameters read at apply time)
 
@@ -35,8 +35,8 @@ Default domain: `daws88s.online`
 |---|---|---|
 | `project` | `roboshop` | Project name used in resource names and tags |
 | `environment` | `dev` | Environment name used in resource names and tags |
-| `zone_id` | `Z05013202FKF0ZL12WAOP` | Route 53 hosted zone ID |
-| `domain_name` | `daws88s.online` | Base domain for DNS records |
+| `zone_id` | `Z0883755364LI3FEBC65Q` | Route 53 hosted zone ID |
+| `domain_name` | `devopsdaws.online` | Base domain for DNS records |
 | `sonar` | `true` | Set to `false` to skip SonarQube instance and its DNS record |
 
 
@@ -50,7 +50,8 @@ terraform apply -var="sonar=false"
 Once you setup and login to jenkins.
 
 ### Plugins
-* Pipeline utility steps
+* Pipeline Stage View
+* Pipeline Utility Steps
 * AWS creds
 * AWS Steps
 * Sonarqube scanner
@@ -61,17 +62,17 @@ Once you setup and login to jenkins.
 * sonar-creds
 
 ### Master Node architecture
-* jenkins agent is jenkins-agent.daws88s.online
+* jenkins agent is jenkins-agent.devopsdaws.online
 * roboshop as label
 
 # Sonar
 
-* Scanner Tool configuration
-* Server configuration in system
-* Authentication token
+* Scanner Tool Configuration
+* Server Configuration in System
+* Server Authentication Token
 * Webhook
-* Standard mode
-* Quality gate creation
+* Standard Experience Mode
+* Quality Gate creation
 
 ### 🐞 Bugs
 
@@ -118,24 +119,23 @@ This report should be uploaded to SonarQube server through agent.
 ### 🔒 Security Rating
 Rating based on severity of vulnerabilities
 
-**Ratings logic:**
-A → No vulnerabilities
+**Ratings logic:**  
+A → No vulnerabilities  
 B–E → Based on highest severity found
 
-Example:
+Example:  
 1 Critical vulnerability → Rating becomes E <br/>
 Security Rating = worst vulnerability decides
 
 ### 🛠️ Maintainability Rating
 
-Rating based on Technical Debt Ratio
-Technical Debt Ratio formula:
+Rating based on Technical Debt Ratio Technical Debt Ratio formula:
 ```
 (Total remediation cost / Development cost) × 100
 ```
-1️⃣ Total Remediation Cost (SonarQube)
-What it means
-Example:
+1️⃣ Total Remediation Cost (SonarQube)  
+What it means?  
+Example:  
 Total time required to fix all Code Smells in the codebase.
 | Code Smell        | Fix Time |
 | ----------------- | -------- |
@@ -147,10 +147,10 @@ Total time required to fix all Code Smells in the codebase.
 Total remediation cost = 1h 32m
 ```
 
-2️⃣ Development Cost (SonarQube)
-What it means?
-Estimated time it would take to write the existing code from scratch.
-SonarQube uses a fixed heuristic:
+2️⃣ Development Cost (SonarQube)  
+What it means?  
+Estimated time it would take to write the existing code from scratch.  
+SonarQube uses a fixed heuristic:  
 Development cost = Lines of Code × 30 minutes
 (30 minutes per line is SonarQube’s default assumption)
 
@@ -164,12 +164,13 @@ Development cost = 1,000 × 30 min = 30,000 min ≈ 500 hours
 **Real Example:**
 Lines of Code: 2,000
 
-Development cost = 2,000 × 30 min = 1,000 hours
+Development cost = 2,000 × 30 min = 1,000 hours  
 Total remediation cost = 50 hours
 ```
 Technical Debt Ratio = (50 / 1000) × 100 = 5%
 ```
-**Ratings:**
+
+**Ratings:**  
 A → ≤ 5%
 
 B → 6–10%
