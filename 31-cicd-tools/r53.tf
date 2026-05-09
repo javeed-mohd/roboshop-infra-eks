@@ -18,6 +18,7 @@ resource "aws_route53_record" "jenkins_agent" {
   allow_overwrite = true
 }
 
+/*
 # Creation of SonarQube Route53 record
 resource "aws_route53_record" "sonarqube" {
   count           = var.sonar ? 1 : 0
@@ -28,3 +29,4 @@ resource "aws_route53_record" "sonarqube" {
   records         = [aws_instance.sonarqube[0].public_ip]
   allow_overwrite = true
 }
+*/
