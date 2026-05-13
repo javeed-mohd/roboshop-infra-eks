@@ -63,18 +63,18 @@ Once you setup and login to jenkins.
 * ssh-creds
 * aws-creds
 * sonar-creds
-* github-token
-    ◦ Create Fine-grained token
-    ◦ In Git - Profile - Settings - Developer Settings - Personal access tokens - Fine-grained tokens - Generate new token
-    ◦ Provide Token name - Select All repositories
-    ◦ Permissions - Add permissions
-        ▪ Dependabot alerts - Read
-        ▪ Commit statuses   - Read and Write
-        ▪ Code              - Read and Write
+* github-token  
+    ◦ Create Fine-grained token  
+    ◦ In Git - Profile - Settings - Developer Settings - Personal access tokens - Fine-grained tokens - Generate new token  
+    ◦ Provide Token name - Select All repositories  
+    ◦ Permissions - Add permissions  
+        ▪ Dependabot alerts - Read  
+        ▪ Commit statuses   - Read and Write  
+        ▪ Code              - Read and Write  
 * jira-creds (JIRA free trial)
 
 ### Master Node Architecture
-* jenkins agent is jenkins-agent.devopsdaws.online
+* jenkins agent is `jenkins-agent.devopsdaws.online`
 * `roboshop` as label
 
 # Sonar
