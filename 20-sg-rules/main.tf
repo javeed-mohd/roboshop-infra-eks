@@ -111,6 +111,17 @@ resource "aws_security_group_rule" "eks_control_plane_bastion" {
   security_group_id        = local.eks_control_plane_sg_id 
 }
 
+# Creation of EKS Control Plane Security Group Rule, it should accept connection from jenkins agent
+resource "aws_security_group_rule" "eks_control_plane_jenkins_agent" {
+  type                     = "ingress"
+  from_port                = 443
+  to_port                  = 443
+  protocol                 = "tcp"
+  # Where traffic is coming from?
+  source_security_group_id = local.jenkins_agent_sg_id  # Either cidr block or security group should be used...
+  security_group_id        = local.eks_control_plane_sg_id 
+}
+
 # Creation of EKS Node Security Group Rule, it should accept connection from bastion
 resource "aws_security_group_rule" "eks_node_bastion" {
   type                     = "ingress"

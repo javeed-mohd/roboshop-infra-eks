@@ -54,25 +54,41 @@ Once you setup and login to jenkins.
 * Pipeline Utility Steps
 * Pipeline AWS Steps
 * AWS Credentials
-* Sonarqube scanner
+* Sonarqube Scanner
+* Multibranch Scan Webhook Trigger
+* JIRA Pipeline Steps
+* Generic Webhook Trigger
 
 ### Credentials
 * ssh-creds
 * aws-creds
 * sonar-creds
+* github-token
+    ◦ Create Fine-grained token
+    ◦ In Git - Profile - Settings - Developer Settings - Personal access tokens - Fine-grained tokens - Generate new token
+    ◦ Provide Token name - Select All repositories
+    ◦ Permissions - Add permissions
+        ▪ Dependabot alerts - Read
+        ▪ Commit statuses   - Read and Write
+        ▪ Code              - Read and Write
+* jira-creds (JIRA free trial)
 
-### Master Node architecture
+### Master Node Architecture
 * jenkins agent is jenkins-agent.devopsdaws.online
-* roboshop as label
+* `roboshop` as label
 
 # Sonar
 
-* Scanner Tool Configuration
-* Server Configuration in System
-* Server Authentication Token
+* Scanner Tool Configuration        - `sonar-8`
+* Server Configuration in System    - `sonar-server`
+* Sonar Authentication Token
 * Webhook
 * Standard Experience Mode
-* Quality Gate creation
+* Quality Gate Creation
+
+# Jenkins Shared Library
+
+* Configure jenkins-shared-library repo in Manage Jenkins -> System -> Global trusted library section 
 
 ### 🐞 Bugs
 
@@ -108,7 +124,7 @@ Percentage of code that is executed by unit tests.
 Coverage = (Lines covered by tests / Lines to cover) × 100
 ```
 
-Unit testing will give us a JSON report
+Unit testing will give us a JSON report:
 * Total test cases executed
 * How many passed, How many failed
 
@@ -190,4 +206,4 @@ Duplication
 Rating based on Bugs severity  
 Blocker/Critical bugs push rating down fast
 
-➡️ Reliability = stability of the app
+➡️ Reliability = Stability of the application
