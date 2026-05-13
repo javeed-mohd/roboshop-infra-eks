@@ -68,9 +68,9 @@ Once you setup and login to jenkins.
     ◦ In Git - Profile - Settings - Developer Settings - Personal access tokens - Fine-grained tokens - Generate new token  
     ◦ Provide Token name - Select All repositories  
     ◦ Permissions - Add permissions  
-        ▪ Dependabot alerts - Read  
-        ▪ Commit statuses   - Read and Write  
-        ▪ Code              - Read and Write  
+    ▪ Dependabot alerts - Read  
+    ▪ Commit statuses   - Read and Write  
+    ▪ Code              - Read and Write  
 * jira-creds (JIRA free trial)
 
 ### Master Node Architecture
