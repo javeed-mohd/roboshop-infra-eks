@@ -1,5 +1,4 @@
 # Catalogue ECR repository
-/*
 resource "aws_ecr_repository" "catalogue" {
   name                 = "${var.project}/catalogue"
   image_tag_mutability = "MUTABLE"
@@ -64,9 +63,9 @@ resource "aws_ecr_repository" "frontend" {
     scan_on_push = false
   }
 }
-*/
 
-# Backend and Frontend components Elastic Container Registry repositories
+/*
+# Backend and Frontend components Elastic Container Registry (ECR) repositories
 resource "aws_ecr_repository" "repos" {
   for_each = toset([
     "catalogue",
@@ -92,3 +91,4 @@ resource "aws_ecr_repository" "repos" {
     }
   )
 }
+*/
