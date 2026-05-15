@@ -70,3 +70,8 @@ data "aws_ssm_parameter" "sonar_sg_id" {
     name = "/${var.project}/${var.environment}/sonar_sg_id"                 # /roboshop/dev/sonar_sg_id
 }
 */
+
+# Runner SG Id data source
+data "aws_ssm_parameter" "runner_sg_id" {
+    name = "/${var.project}/${var.environment}/runner_sg_id"                # /roboshop/dev/runner_sg_id
+}

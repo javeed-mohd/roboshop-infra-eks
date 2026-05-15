@@ -1,20 +1,22 @@
 # Creation of Jenkins Route53 record
 resource "aws_route53_record" "jenkins" {
+  count           = var.jenkins ? 1 : 0
   zone_id         = var.zone_id
   name            = "jenkins.${var.domain_name}"                # jenkins.devopsdaws.online
   type            = "A"
   ttl             = "1"
-  records         = [aws_instance.jenkins.public_ip]
+  records         = [aws_instance.jenkins[0].public_ip]
   allow_overwrite = true
 }
 
 # Creation of Jenkins Agent Route53 record
 resource "aws_route53_record" "jenkins_agent" {
+  count           = var.jenkins ? 1 : 0
   zone_id         = var.zone_id
   name            = "jenkins-agent.${var.domain_name}"          # jenkins-agent.devopsdaws.online
   type            = "A"
   ttl             = "1"
-  records         = [aws_instance.jenkins_agent.private_ip]
+  records         = [aws_instance.jenkins_agent[0].private_ip]
   allow_overwrite = true
 }
 
@@ -27,6 +29,17 @@ resource "aws_route53_record" "sonarqube" {
   type            = "A"
   ttl             = "1"
   records         = [aws_instance.sonarqube[0].public_ip]
+  allow_overwrite = true
+}
+
+# Creation of Runner Route53 record
+resource "aws_route53_record" "runner" {
+  count           = var.runner ? 1 : 0
+  zone_id         = var.zone_id
+  name            = "runner.${var.domain_name}"                 # runner.devopsdaws.online
+  type            = "A"
+  ttl             = "1"
+  records         = [aws_instance.runner[0].public_ip]
   allow_overwrite = true
 }
 */

@@ -122,6 +122,28 @@ resource "aws_security_group_rule" "eks_control_plane_jenkins_agent" {
   security_group_id        = local.eks_control_plane_sg_id 
 }
 
+# Creation of Runner Security Group Rule, it should accept connection from SSH (Secure Shell)
+resource "aws_security_group_rule" "runner_ssh" {
+  type                     = "ingress"
+  from_port                = 22
+  to_port                  = 22
+  protocol                 = "tcp"     # All traffic
+  # Where traffic is coming from?
+  cidr_blocks              = ["0.0.0.0/0"]    # Either cidr block or security group should be used...
+  security_group_id        = local.runner_sg_id
+}
+
+# Creation of EKS Control Plane Security Group Rule, it should accept 443 connection from GitHub Runner
+resource "aws_security_group_rule" "eks_control_plane_runner" {
+  type                     = "ingress"
+  from_port                = 443
+  to_port                  = 443
+  protocol                 = "tcp"
+  # Where traffic is coming from?
+  source_security_group_id = local.runner_sg_id  # Either cidr block or security group should be used...
+  security_group_id        = local.eks_control_plane_sg_id 
+}
+
 # Creation of EKS Node Security Group Rule, it should accept connection from bastion
 resource "aws_security_group_rule" "eks_node_bastion" {
   type                     = "ingress"

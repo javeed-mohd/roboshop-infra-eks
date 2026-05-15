@@ -1,4 +1,4 @@
-# Catalogue ECR repository
+# Catalogue ECR Repository
 resource "aws_ecr_repository" "catalogue" {
   name                 = "${var.project}/catalogue"
   image_tag_mutability = "MUTABLE"
@@ -9,7 +9,7 @@ resource "aws_ecr_repository" "catalogue" {
   }
 }
 
-# User ECR repository
+# User ECR Repository
 resource "aws_ecr_repository" "user" {
   name                 = "${var.project}/user"
   image_tag_mutability = "MUTABLE"
@@ -20,7 +20,7 @@ resource "aws_ecr_repository" "user" {
   }
 }
 
-# Cart ECR repository
+# Cart ECR Repository
 resource "aws_ecr_repository" "cart" {
   name                 = "${var.project}/cart"
   image_tag_mutability = "MUTABLE"
@@ -31,7 +31,7 @@ resource "aws_ecr_repository" "cart" {
   }
 }
 
-# Shipping ECR repository
+# Shipping ECR Repository
 resource "aws_ecr_repository" "shipping" {
   name                 = "${var.project}/shipping"
   image_tag_mutability = "MUTABLE"
@@ -42,7 +42,7 @@ resource "aws_ecr_repository" "shipping" {
   }
 }
 
-# Payment ECR repository
+# Payment ECR Repository
 resource "aws_ecr_repository" "payment" {
   name                 = "${var.project}/payment"
   image_tag_mutability = "MUTABLE"
@@ -53,7 +53,7 @@ resource "aws_ecr_repository" "payment" {
   }
 }
 
-# Frontend ECR repository
+# Frontend ECR Repository
 resource "aws_ecr_repository" "frontend" {
   name                 = "${var.project}/frontend"
   image_tag_mutability = "MUTABLE"
@@ -65,7 +65,7 @@ resource "aws_ecr_repository" "frontend" {
 }
 
 /*
-# Backend and Frontend components Elastic Container Registry (ECR) repositories
+# Backend and Frontend components Elastic Container Registry (ECR) Repositories
 resource "aws_ecr_repository" "repos" {
   for_each = toset([
     "catalogue",

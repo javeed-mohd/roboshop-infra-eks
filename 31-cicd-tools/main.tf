@@ -1,5 +1,6 @@
 # Creation of Jenkins EC2 Instance
 resource "aws_instance" "jenkins" {
+  count                   = var.jenkins ? 1 : 0
   ami                     = local.ami_id
   instance_type           = "t3.small"
   subnet_id               = local.public_subnet_id
@@ -29,6 +30,7 @@ resource "aws_instance" "jenkins" {
 
 # Creation of Jenkins Agent EC2 Instance
 resource "aws_instance" "jenkins_agent" {
+  count                   = var.jenkins ? 1 : 0
   ami                     = local.ami_id
   instance_type           = "t3.micro"
   subnet_id               = local.public_subnet_id
@@ -51,6 +53,36 @@ resource "aws_instance" "jenkins_agent" {
   tags = merge(
     {
         Name = "${var.project}-${var.environment}-jenkins-agent"
+    },
+    local.common_tags
+  )
+}
+
+# Creation of Runner EC2 Instance
+resource "aws_instance" "runner" {
+  count                   = var.runner ? 1 : 0
+  ami                     = local.ami_id
+  instance_type           = "t3.micro"
+  subnet_id               = local.public_subnet_id
+  vpc_security_group_ids  = [local.runner_sg_id]
+  user_data               = file("runner.sh")
+
+  # Extending the storage
+  root_block_device {
+    volume_size = 50
+    volume_type = "gp3"
+    tags = merge(
+      {
+          Name = "${var.project}-${var.environment}-runner"
+      },
+    local.common_tags
+    )
+  }
+
+  # roboshop-dev-runner
+  tags = merge(
+    {
+        Name = "${var.project}-${var.environment}-runner"
     },
     local.common_tags
   )
