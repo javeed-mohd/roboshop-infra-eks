@@ -20,10 +20,12 @@ variable "sonar" {
   default   = false
 }
 
+# Set to false to skip Jenkins instance and its DNS record creation while using Runner
 variable "jenkins" {
     default = true
 }
 
+# Set to true to get Runner instance while using Runner
 variable "runner" {
     default = false
 }

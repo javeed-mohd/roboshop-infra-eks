@@ -11,6 +11,7 @@ Terraform configuration to provision CI/CD infrastructure for the **roboshop** p
 | Jenkins Server | `t3.small` | Redhat-9-DevOps-Practice | Placed in public subnet; Jenkins installed via `jenkins.sh` |
 | Jenkins Agent | `t3.micro` | Redhat-9-DevOps-Practice | 50 GB gp3 root volume; Java installed via `jenkins-agent.sh` |
 | SonarQube Server | `t3.large` | SolveDevOps-SonarQube-Server-Ubuntu24.04 | 20 GB gp3 root volume; conditional on `var.sonar` (default: `true`) |
+| Runner | `t3.micro` | Redhat-9-DevOps-Practice | 50 GB gp3 root volume; all required are installed via `runner.sh` |
 
 ### Route 53 DNS Records
 
@@ -28,6 +29,7 @@ Default domain: `devopsdaws.online`
 - `/<project>/<env>/jenkins_sg_id` — security group applied to Jenkins server and agent
 - `/<project>/<env>/jenkins_agent_sg_id` — security group for Jenkins agent
 - `/<project>/<env>/sonar_sg_id` — security group applied to SonarQube server
+- `/<project>/<env>/runner_sg_id` — security group for Runner agent
 
 ## Variables
 
@@ -38,12 +40,25 @@ Default domain: `devopsdaws.online`
 | `zone_id` | `Z0883755364LI3FEBC65Q` | Route 53 hosted zone ID |
 | `domain_name` | `devopsdaws.online` | Base domain for DNS records |
 | `sonar` | `true` | Set to `false` to skip SonarQube instance and its DNS record |
-
+| `jenkins` | `true` | Set to `false` to skip Jenkins instance and its DNS record while using runner |
+| `runner` | `false` | Set to `true` to get Runner instance |
 
 To provision without SonarQube:
 
 ```bash
-terraform apply -var="sonar=false"
+terraform apply -var "sonar=false"
+```
+
+To provision without Runner while using Jenkins:
+
+```bash
+terraform apply -var "jenkins=true" -var "runner=false"
+```
+
+To provision without Jenkins while using Runner:
+
+```bash
+terraform apply -var "jenkins=false" -var "runner=true"
 ```
 
 ## Jenkins Setup

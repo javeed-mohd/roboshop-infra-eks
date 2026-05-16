@@ -31,15 +31,4 @@ resource "aws_route53_record" "sonarqube" {
   records         = [aws_instance.sonarqube[0].public_ip]
   allow_overwrite = true
 }
-
-# Creation of Runner Route53 record
-resource "aws_route53_record" "runner" {
-  count           = var.runner ? 1 : 0
-  zone_id         = var.zone_id
-  name            = "runner.${var.domain_name}"                 # runner.devopsdaws.online
-  type            = "A"
-  ttl             = "1"
-  records         = [aws_instance.runner[0].public_ip]
-  allow_overwrite = true
-}
 */
